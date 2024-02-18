@@ -1,29 +1,27 @@
+// App.js
 import React from 'react';
 import Header from './Header';
 import About from './About';
-import Article from './Article';
+import Article from './Article'
+import ArticleList from './ArticleList';
 import blogData from '../data/blog';
-import { calculateEmojis } from '../assets/Emoji'; 
-
-
-// console.log(blogData);
+import { calculateEmojis } from '../assets/Emoji';
 
 function App() {
   return (
     <div className='App'>
       <Header name={blogData.name} />
-      <About image={blogData.image} aboutText={blogData.about} />
+      <About image={blogData.image} about={blogData.about} />
+      <ArticleList posts={blogData.posts} />{' '}
       {blogData.posts.map((post) => (
         <div key={post.id}>
           <Article title={post.title} date={post.date} preview={post.preview} />
           {post.minutes <= 30
             ? calculateEmojis(post.minutes, 'coffee')
-            : calculateEmojis(post.minutes, 'bento')}{' '}
+            : calculateEmojis(post.minutes, 'bento')}
           {post.minutes} min read
         </div>
       ))}
-      You're on your own from here! Follow the deliverables; test things out in
-      the browser as you write your code; and good luck!
     </div>
   );
 }
